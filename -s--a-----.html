@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGA | Model Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Iconlar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- RANG VA SOZLAMALAR --- */
+        :root {
+            --bg-color: #ffffff;       /* OQ FON */
+            --bg-secondary: #fdfdfd;   /* Juda och kulrang (ajratish uchun) */
+            --text-color: #222222;     /* To'q qora (o'qish uchun) */
+            --gold-color: #d4af37;     /* OLTIN SARIQ (Asosiy rang) */
+            --gold-light: #f3e5ab;     /* Och sariq */
+            
+            --font-heading: 'Cormorant Garamond', serif; /* Hashamatli shrift */
+            --font-body: 'Montserrat', sans-serif;       /* Zamonaviy shrift */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Matn belgilanganda SARIQ bo'ladi */
+        ::selection {
+            background: var(--gold-color);
+            color: #fff;
+        }
+
+        /* Scrollbar (O'tkazgich) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-color);
+            border-radius: 4px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATSIYA (OQ FONDA) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 6%;
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95); /* OQ fon */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #000;
+            border: 2px solid var(--gold-color);
+            padding: 2px 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li { margin-left: 35px; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        /* Hover effekti - Oltin chiziq */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--gold-color);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold-color); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO (BOSH QISM) --- */
+        .hero {
+            height: 100vh;
+            /* Yorqinroq rasm */
+            background: url('./__pycache__/photo_2026-01-05_03-02-48.jpg');
+            background-size: cover;
+            background-position: center top;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Oqish parda */
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.1); /* Rasm yorqin turadi */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.2); /* Shaffof oq fon yozuv tagida */
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5); /* Oq yozuv ko'rinishi uchun soya */
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #fff;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        /* TUGMA (Oltin rang) */
+        .btn {
+            padding: 15px 45px;
+            background-color: var(--gold-color);
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #b59025; /* To'qroq oltin */
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- SECTION STYLES --- */
+        .section {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #000;
+        }
+        
+        /* Sarlavha tagidagi sariq chiziq */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold-color);
+            margin: 10px auto 0;
+        }
+
+        /* --- ABOUT --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text { flex: 1; }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .about-image { flex: 1; }
+        .about-image img {
+            width: 100%;
+            box-shadow: 20px 20px 0px var(--gold-light); /* Sariq fon rasm orqasida */
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+
+        .stat-item span { color: var(--gold-color); font-weight: 600; font-size: 12px; text-transform: uppercase; }
+        .stat-item h3 { font-size: 1.8rem; font-family: var(--font-heading); margin-top: 5px; }
+
+        /* --- GALEREYA (Katta va Ko'p rasm) --- */
+        .gallery-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .gallery-grid {
+            columns: 3 300px; /* Masonry uslubi (Pinterest kabi) */
+            column-gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            break-inside: avoid;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        /* Rasm ustidagi sariq parda */
+        .gallery-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(212, 175, 55, 0.85); /* Sariq shaffof fon */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .gallery-overlay h3 {
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            transform: translateY(20px);
+            transition: 0.4s;
+        }
+
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-item:hover .gallery-overlay h3 { transform: translateY(0); }
+
+        /* --- CONTACT --- */
+        .contact-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-box {
+            border: 2px solid var(--gold-color);
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
+        
+        .contact-item i { color: var(--gold-color); margin-right: 10px; }
+
+        .socials a {
+            color: #000;
+            font-size: 24px;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .socials a:hover { color: var(--gold-color); }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            font-size: 12px;
+        }
+        footer span { color: var(--gold-color); }
+
+        /* --- MOBIL MOSLASHUV --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 3rem; }
+            .about-container { flex-direction: column; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigatsiya -->
+    <nav class="navbar">
+        <div class="logo">Ogabek.</div>
+        <ul class="nav-links">
+            <li><a href="#home">ГЛАВНАЯ</a></li>
+            <li><a href="#about">ОБО Мне</a></li>
+            <li><a href="#portfolio">PORTFOLIO</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Ogabek Tojimurodov</h1>
+            <p>Fashion & Runway Model</p>
+            <a href="#portfolio" class="btn">Смотреть PORTFOLIONI </a>
+        </div>
+    </header>
+
+    <!-- Men Haqimda -->
+    <section id="about" class="section">
+        <div class="about-container">
+            <div class="about-text">
+                <h2 class="section-title">ОБО Мне</h2>
+                <p>New face model с выразительной внешностью.
+Открыт к коммерческим, fashion и каталог-съемкам.
+Интересует агентское сотрудничество, кастинги и долгосрочные проекты, включая зарубежные рынки.</p>
+                <p>Podium, Я готов фотографировать для выступлений на подиумах, рекламных роликов и журналов.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span>Bo'yi</span>
+                        <h3>178</h3>
+                    </div>
+                    <div class="stat-item">
+                        <span>Весь </span>
+                        <h3>59</h3>
+                    </div>
+                    <div class="stat-item">
+                        <span>Глаза</span>
+                        <h3>Карий</h3>
+                    </div>
+                    <div class="stat-item">
+                        <span>ВолосЫ</span>
+                        <h3>Чёрный</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="./__pycache__/photo_2026-01-05_04-26-39.jpg" alt="Model Aziza">
+            </div>
+        </div>
+    </section>
+
+    <!-- KATTA GALEREYA (KO'P RASMLAR) -->
+    <section id="portfolio" class="section gallery-section">
+        <h2 class="section-title">Мой Работа</h2>
+        <div class="gallery-grid">
+            
+            <!-- Rasm 1 -->
+            <div class="gallery-item">
+                <img src="./__pycache__/photo_2025-12-29_10-18-16 (2).jpg" alt="Model Photo">
+                <div class="gallery-overlay"><h3>Portrait</h3></div>
+            </div>
+
+            <!-- Rasm 2 -->
+            <div class="gallery-item">
+                <img src="./__pycache__/photo_2026-01-04_03-23-52.jpg" alt="Model Photo">
+                <div class="gallery-overlay"><h3>Street Style</h3></div>
+            </div>
+
+            <!-- Rasm 3 -->
+            <div class="gallery-item">
+                <img src="./__pycache__/photo_2026-01-05_04-26-39.jpg" alt="Model Photo">
+                <div class="gallery-overlay"><h3>Studio</h3></div>
+            </div>
+
+            <!-- Rasm 4 -->
+            <div class="gallery-item">
+                <img src="./__pycache__/Frame 60 (1).png" alt="Model Photo">
+                <div class="gallery-overlay"><h3>Elegant</h3></div>
+            </div>
+
+            <!-- Rasm 5 -->
+            <div class="gallery-item">
+                <img src="./__pycache__/photo_2026-01-04_03-23-56.jpg" alt="Model Photo">
+                <div class="gallery-overlay"><h3>Fashion</h3></div>
+            </div>
+
+            <!-- Rasm 6 -->
+            <div class="gallery-item">
+                <img src="./__pycache__/photo_2026-01-04_03-23-58.jpg" alt="Model Photo">
+                <div class="gallery-overlay"><h3>Vogue</h3></div>
+            </div>
+
+           
+        </div>
+    </section>
+
+    <!-- Bog'lanish -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Для партнёров</h2>
+        <div class="contact-container">
+            <p>Свяжитесь с нами по поводу проектов и предложений</p>
+            <div class="contact-box">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i> +7 996 976 99 09
+                       </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i> ogabeks957@gmail.com
+                </div>
+                <div class="socials">
+                    <a href="https://www.instagram.com/mr._shelby.1?igsh=djd0M2MyN2lhc2o3"><i class="fab fa-instagram"></i></a>
+                    <a href="https://@mrshelby2"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Model Portfolio. Design by <span>Professional</span></p>
+    </footer>
+
+</body>
+</html>
